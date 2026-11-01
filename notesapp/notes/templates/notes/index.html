@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<form action="{% url 'logout' %}" method="post">
+{% csrf_token %}
+Logged in as {{ user.username }} <input type="submit" value="Log out">
+</form>
+
+<h2>Add a note</h2>
+<p>Here you can add a short note. Notes can be up to 50 characters.</p>
+<form method="post">
+{% csrf_token %}
+<textarea name="text" maxlength="50" required></textarea>
+<input type="submit" value="Save note">
+</form>
+
+<h2>Notes</h2>
+<form method="get">
+<input type="text" name="q" value="{{ query }}" placeholder="Search">
+<input type="submit" value="Search">
+</form>
+
+<ul>
+{% for note in notes %}
+    <li><a href="{% url 'detail' note.id %}">Note {{ forloop.counter }}</a> {{ note.text }}</li>
+    <form method="post" action="{% url 'delete' note.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+{% empty %}
+    <li>No notes yet.</li>
+{% endfor %}
+</ul>
