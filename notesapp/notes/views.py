@@ -45,5 +45,5 @@ def delete(request, note_id):
         # flaw A01 Broken Access Control: the note is deleted by id only.
         # problem: anyone can delete any note if they know the id.
         # how to fix the flaw: Note.objects.filter(id=note_id, owner=request.user).delete()
-        Note.objects.filter(id=note_id, owner=request.user).delete()
+        Note.objects.filter(id=note_id).delete()
     return redirect("index")
