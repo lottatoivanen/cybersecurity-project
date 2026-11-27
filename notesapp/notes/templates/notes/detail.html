@@ -7,6 +7,6 @@ Logged in as {{ user.username }} <input type="submit" value="Log out">
 
 <h2>Note </h2>
 <p>{{ note.text }}</p>
-<p>Created by {{ note.owner.username }}</p>
-<p>{{ note.created }}</p>
+<p>Created by: {{ note.owner.username }}</p>
+<p>Date: {{ note.created }}</p>
 <p><a href="{% url 'index' %}">Back</a></p>

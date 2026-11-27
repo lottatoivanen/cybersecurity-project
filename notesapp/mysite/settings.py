@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # problem: anyone who can read settings.py can see the secret key.
 # how to fix the flaw: put the secret key in an environment variable and read it from there:
 #   import os
-#   SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "default-secret-key")
+#   SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-%ong-vuj!sk9)dw8sz6x*itw0hyg6fw6)78u00!b!)56th7a^k"
@@ -33,6 +33,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# flaw A02 Cryptographic Failures:
+# how to fix the flaw:
+# import secrets and generate a random key for FIELD_ENCRYPTION_KEY.
+#   import secrets
+#   FIELD_ENCRYPTION_KEY = "secrets.token_bytes(32)"
 
 # Application definition
 

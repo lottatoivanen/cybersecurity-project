@@ -16,7 +16,10 @@ def index(request):
         # flaw A03 Injection: user input is pasted into raw SQL.
         # problem: you can use:  %' OR 1=1 --   to see everyone's notes.
         # how to fix the flaw:
-        #   notes = Note.objects.filter(owner=request.user, text__icontains=query)
+        #   if query:
+        #       notes = Note.objects.filter(owner=request.user, text__icontains=query).order_by("created")
+        #   else:
+        #   notes = Note.objects.filter(owner=request.user,).order_by("created")
         sql = (
             "SELECT * FROM notes_note "
             f"WHERE owner_id = {request.user.id} AND text LIKE '%{query}%'"
