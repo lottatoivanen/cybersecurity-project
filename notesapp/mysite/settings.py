@@ -19,6 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
+# flaw A05 Security Misconfiguration: the secret key is hardcoded in settings.py.
+# problem: anyone who can read settings.py can see the secret key.
+# how to fix the flaw: put the secret key in an environment variable and read it from there:
+#   import os
+#   SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "default-secret-key")
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-%ong-vuj!sk9)dw8sz6x*itw0hyg6fw6)78u00!b!)56th7a^k"
 

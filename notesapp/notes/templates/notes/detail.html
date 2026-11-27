@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 
+<form action="{% url 'logout' %}" method="post">
+{% csrf_token %}
+Logged in as {{ user.username }} <input type="submit" value="Log out">
+</form>
+
 <h2>Note </h2>
 <p>{{ note.text }}</p>
+<p>Created by {{ note.owner.username }}</p>
 <p>{{ note.created }}</p>
 <p><a href="{% url 'index' %}">Back</a></p>
